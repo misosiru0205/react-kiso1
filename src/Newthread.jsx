@@ -12,7 +12,7 @@ export const Newthread = () =>{
         //送信クリック時の処理
     async function click(){
         //console.log(obje)
-        if(obje.title != ""){ //入力値が空でない時に送信する
+        if(obje.title !== ""){ //入力値が空でない時に送信する
             try{
                     //fetchにてPOSTする　fetch("url",{method:"POST",~~~~~~~,~~~~~~})
                 const res = await fetch("https://railway.bulletinboard.techtrain.dev/threads",{
@@ -35,7 +35,7 @@ export const Newthread = () =>{
         //送信を押すことでonClickからclick関数に飛び入力した内容をAPIに送る
     return(
         <>
-        <p>新規スレッド作成</p>
+        <p>新規スレッド作成画面</p>
         <form>
             <p>新規スレッド名<br/><input type="text" name="newthread" onChange={(e) => change(e)}></input>
             <input type="button" value="送信" onClick={click}></input></p>
