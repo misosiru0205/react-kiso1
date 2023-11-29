@@ -49,7 +49,7 @@ export const Thread = () =>{
 
         <label className="label">
             <select id="address" value={select} onChange={(e) => change(e)}>
-                <option hidden value="aaa">選択してください</option>
+                <option hidden value="">選択してください</option>
                 {title.map((test,index)=>
                 <option key={index} value={index}>
                     {Object.values(test.title)}
