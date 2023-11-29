@@ -26,9 +26,10 @@ export const Thread = () =>{
 
     function hyouzi(){
         if(select !== ""){
-        const res = document.getElementById("address"); //セレクターID名「address」オブジェクトを取得する
+        /*const res = document.getElementById("address"); //セレクターID名「address」オブジェクトを取得する
         const resA = res.options[res.selectedIndex].value //セレクトボックスの選択インデックスの項目を選択
-        console.log(title[resA].id) //選択したタイトルのIDを取得
+        */
+        console.log(title[select].id) //選択したタイトルのIDを取得
         }else{}
     }
 
