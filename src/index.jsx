@@ -7,6 +7,7 @@ import { BrowserRouter,Routes,Route } from "react-router-dom";
 //表示するコンポーネントの呼び出し
 import { App } from "./App";
 import { Newthread } from "./Newthread";
+import { Threadsget } from "./Threadsget";
 
 
 const root = document.getElementById('root')
@@ -16,6 +17,7 @@ reactRoot.render(
     <Routes>
         <Route path='/' element={<App/>}></Route>
         <Route path='/Newthread' element={<Newthread/>}></Route>
+        <Route path='/Threadsget' element={<Threadsget/>}></Route>
     </Routes>
     </BrowserRouter>
 )
