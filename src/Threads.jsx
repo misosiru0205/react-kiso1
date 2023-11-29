@@ -1,13 +1,11 @@
 //useEffectとuseStateの呼び出し
 import { useEffect,useState } from "react"
-import { Threadsget } from "./Threadsget";
 //スレッド取得用　コンポーネント
 export const Thread = () =>{
 
         //useStateの定義 スレッドタイトルの取得用
     const [title,setTitle] = useState([]);
     const [select,setSelect] = useState('')
-    const [num,setNum] = useState('')
         //thread取得用関数　fetchを使うので asyncとawaitを使う
     async function getthread(){
 
@@ -27,11 +25,11 @@ export const Thread = () =>{
     }
 
     function hyouzi(){
+        if(select !== ""){
         const res = document.getElementById("address"); //セレクターID名「address」オブジェクトを取得する
         const resA = res.options[res.selectedIndex].value //セレクトボックスの選択インデックスの項目を選択
         console.log(title[resA].id) //選択したタイトルのIDを取得
-        console.log(res.selectedIndex) //indexのみ
-        console.log(res.options[res.selectedIndex])//選択したオブジェクトのみ
+        }else{}
     }
 
                 /*受け取ったjsonは配列の中にオブジェクトがあったので
@@ -43,8 +41,8 @@ export const Thread = () =>{
         <div className="list">
         <h1>スレッド一覧</h1>
             {title.map((test,index) =>
-            <a key={index} className="thread">
-                {Object.values(test.title)}</a>
+            <p key={index} className="thread">
+                {Object.values(test.title)}</p>
         )}
         </div>
 
