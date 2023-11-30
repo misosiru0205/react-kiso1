@@ -1,7 +1,7 @@
 //useEffectとuseStateの呼び出し
 import { useEffect,useState } from "react"
 //スレッド取得用　コンポーネント
-export const Thread = () =>{
+export const ThreadList = () =>{
 
         //useStateの定義 スレッドタイトルの取得用
     const [title,setTitle] = useState([]);
@@ -10,14 +10,14 @@ export const Thread = () =>{
     async function getthread(){
 
             //APIにてスレッドを取得 fetch("url",{method:"get"});
-        const api = await fetch("https://railway.bulletinboard.techtrain.dev/threads",{method:'get'});
-        const json = await api.json(); //json()でファイルの受け取り？
+        const res = await fetch("https://railway.bulletinboard.techtrain.dev/threads",{method:'get'});
+        const json = await res.json(); //json()でファイルの受け取り？
         await setTitle(json); //setStateでtitle内に配置
     }
 
         //ページを表示した際にスレッドを取得できるようにuseEffect内でgetThreadを使いthread内に
     useEffect(()=> {
-        getthread();
+         getthread();
     },[])
 
     function change(e){

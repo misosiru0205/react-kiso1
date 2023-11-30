@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "./Header";
-import { Thread } from "./Threads";
+import { ThreadList } from "./ThreadList";
 import "./App.css"
 
 //コンポーネント内部　別にfunction使ってもいいし　後でexportしてもいい
@@ -11,7 +11,7 @@ export const App = () =>{
     return(
         <div>
             <Header />
-            <Thread />
+            <ThreadList />
         </div>
     )
 }

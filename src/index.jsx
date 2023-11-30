@@ -16,8 +16,8 @@ reactRoot.render(
     <BrowserRouter>
     <Routes>
         <Route path='/' element={<App/>}></Route>
-        <Route path='/Newthread' element={<Newthread/>}></Route>
-        <Route path='/Threadsget' element={<Threadsget/>}></Route>
+        <Route path='/thread/new' element={<Newthread/>}></Route>
+        <Route path="Threadsget/:id" element={<Threadsget/>}></Route>
     </Routes>
     </BrowserRouter>
 )
