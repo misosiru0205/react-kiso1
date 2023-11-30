@@ -2,23 +2,24 @@
 import { useEffect,useState } from "react"
 //スレッド取得用　コンポーネント
 export const ThreadList = () =>{
-
         //useStateの定義 スレッドタイトルの取得用
     const [title,setTitle] = useState([]);
     const [select,setSelect] = useState('')
+
+        //ページを表示した際にスレッドを取得できるようにuseEffect内でgetThreadを使いthread内に
+    useEffect(()=> {//useEffectはPromiseを受け取るとエラーを出す？？？ので無名関数を中に入れる
+         (async() => {
+            await getthread();
+        })();
+    },[])
+
         //thread取得用関数　fetchを使うので asyncとawaitを使う
     async function getthread(){
-
             //APIにてスレッドを取得 fetch("url",{method:"get"});
         const res = await fetch("https://railway.bulletinboard.techtrain.dev/threads",{method:'get'});
         const json = await res.json(); //json()でファイルの受け取り？
-        await setTitle(json); //setStateでtitle内に配置
+        setTitle(json); //setStateでtitle内に配置
     }
-
-        //ページを表示した際にスレッドを取得できるようにuseEffect内でgetThreadを使いthread内に
-    useEffect(()=> {
-         getthread();
-    },[])
 
     function change(e){
         setSelect(e.target.value);
@@ -26,9 +27,6 @@ export const ThreadList = () =>{
 
     function hyouzi(){
         if(select !== ""){
-        /*const res = document.getElementById("address"); //セレクターID名「address」オブジェクトを取得する
-        const resA = res.options[res.selectedIndex].value //セレクトボックスの選択インデックスの項目を選択
-        */
         console.log(title[select].id) //選択したタイトルのIDを取得
         }else{}
     }
