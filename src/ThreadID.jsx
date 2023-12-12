@@ -20,7 +20,7 @@ useEffect(()=>{
             const object = await response.json();
 
             if(response.status === 200){
-                if((object.posts).length === 0){throw new Error('まだ投稿されていません')}
+                if((object.posts).length === 0){alert('まだ投稿されていません')}
                 setPosts(object.posts)
                 //console.log(object.posts)
             }
