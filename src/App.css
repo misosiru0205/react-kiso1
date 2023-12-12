@@ -45,10 +45,12 @@ html{
 }
 
 .post{
+    white-space: pre-wrap;
     font-size: 16px;
     margin: 4px;
     width: 400px;
-    height: 40px;
+    min-height: 45px;
+    height: auto;
     text-align: left;
     border:1px solid;
     border-color: black;

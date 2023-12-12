@@ -17,20 +17,19 @@ useEffect(()=>{
     (async()=>{
         try{
             const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${url.id}/posts`,{method:'get'})
-            const json = await response.json();
+            const object = await response.json();
 
             if(response.status === 200){
-                if((json.posts).length === 0){throw new Error('まだ投稿されていません')}
-                setPosts(json.posts)
-                //console.log(json)
+                if((object.posts).length === 0){throw new Error('まだ投稿されていません')}
+                setPosts(object.posts)
+                //console.log(object.posts)
             }
             else if(response.status === 400){
                 throw new Error('バリデーションエラー')}
             else if(response.status === 500){
                 throw new Error('サーバーエラー')}
             }
-            catch(error){
-                alert(error)}
+        catch(error){alert(error)}
     })();
 },[url,postID])
 
@@ -42,24 +41,24 @@ function change(e){
 async function textpost(){
     try{
         if(text === ""){throw new Error('投稿内容を入力してください')}
-        const object = {'post':(text)}
+        const post = {'post':text}
 
         const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${url.id}/posts`,{
             method:'POST',
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(object)})
+            body:JSON.stringify(post)})
 
-        const json = await response.json()
+        const object = await response.json()
         if(response.status === 400){throw new Error("バリテーションエラー")}
         else if(response.status === 500){throw new Error("サーバーエラー")}
 
-        setPostID(json.id)
+        setPostID(object.id)
         setText("")
-        alert("送信成功:" + json.post)   
+        alert("送信成功:" + object.post)   
     }
     catch(error){
-        alert(error)
-    }
+        console.log(error)
+        alert(error)}
 }
 
     return (
@@ -71,10 +70,10 @@ async function textpost(){
             <p key={index} className="post">{Object.values(posts.post)}</p>
             )}
     
-        <form >
-            <textarea className="textarea" value={text} placeholder="投稿内容を入力" onChange={(e)=> change(e)} required ></textarea>
-            <input type="button" value="送信" onClick={() => textpost()}></input>
-        </form>
+            <form >
+                <textarea className="textarea" value={text} placeholder="投稿内容を入力" onChange={(e)=> change(e)}></textarea>
+                <input type="button" value="送信" onClick={() => textpost()}></input>
+            </form>
         </div> 
 
         <a href="http://localhost:3000">掲示板TOP</a>
