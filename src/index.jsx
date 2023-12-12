@@ -5,9 +5,9 @@ import * as ReactDOM from 'react-dom/client'
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 //表示するコンポーネントの呼び出し
-import { App } from "./App";
-import { Newthread } from "./Newthread";
-import { Threadsget } from "./Threadsget";
+import { ThreadList } from "./ThreadList";
+import { Threadnew } from "./Threadnew";
+import { ThreadID } from "./ThreadID";
 
 
 const root = document.getElementById('root')
@@ -15,9 +15,9 @@ const reactRoot = ReactDOM.createRoot(root)
 reactRoot.render(
     <BrowserRouter>
     <Routes>
-        <Route path='/' element={<App/>}></Route>
-        <Route path='/thread/new' element={<Newthread/>}></Route>
-        <Route path="Threadsget/:id" element={<Threadsget/>}></Route>
+        <Route path='/' element={<ThreadList/>}></Route>
+        <Route path='/thread/new' element={<Threadnew/>}></Route>
+        <Route path="/thread/:id" element={<ThreadID/>}></Route>
     </Routes>
     </BrowserRouter>
 )
