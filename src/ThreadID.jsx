@@ -40,25 +40,30 @@ function change(e){
 
 async function textpost(){
     try{
-        if(text === ""){throw new Error('投稿内容を入力してください')}
-        const post = {'post':text}
+        if(text !== ""){
+            const posttext = text.replace(/\s+!||\n+/g,"")
+            if(text.replace(/\s+/g,"") === ""){throw new Error("空白文字のみで入力しないでください")}
+        
+            const post = {'post':posttext}
+            const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${url.id}/posts`,{
+                method:'POST',
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(post)})
 
-        const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${url.id}/posts`,{
-            method:'POST',
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(post)})
+            const object = await response.json()
+            if(response.status === 400){throw new Error("バリテーションエラー")}
+            else if(response.status === 500){throw new Error("サーバーエラー")}
 
-        const object = await response.json()
-        if(response.status === 400){throw new Error("バリテーションエラー")}
-        else if(response.status === 500){throw new Error("サーバーエラー")}
-
-        setPostID(object.id)
-        setText("")
-        alert("送信成功:" + object.post)   
+            setPostID(object.id)
+            setText("")
+            alert("送信成功:" + object.post)
+        }
+        else{throw new Error("投稿内容を入力して下さい")}   
     }
     catch(error){
         console.log(error)
-        alert(error)}
+        alert(error)
+        setText("")}
 }
 
     return (
@@ -70,9 +75,9 @@ async function textpost(){
             <p key={index} className="post">{Object.values(posts.post)}</p>
             )}
     
-            <form >
-                <textarea className="textarea" value={text} placeholder="投稿内容を入力" onChange={(e)=> change(e)}></textarea>
-                <input type="button" value="送信" onClick={() => textpost()}></input>
+            <form>
+                <textarea className="textarea" value={text} placeholder="投稿内容を入力" onChange={(e)=> change(e)} required></textarea>
+                <input type="button" value="送信" onClick={()=>textpost()}></input>
             </form>
         </div> 
 
