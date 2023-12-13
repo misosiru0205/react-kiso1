@@ -41,9 +41,9 @@ function change(e){
 async function textpost(){
     try{
         if(text !== ""){
-            const posttext = text.replace(/\s+!||\n+/g,"")
             if(text.replace(/\s+/g,"") === ""){throw new Error("空白文字のみで入力しないでください")}
-        
+            const posttext = text.replace(/\s+!||\n+/g,"")
+            
             const post = {'post':posttext}
             const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${url.id}/posts`,{
                 method:'POST',

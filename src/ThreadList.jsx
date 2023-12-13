@@ -40,8 +40,6 @@ export const ThreadList = () =>{
             alert(error)
         }
     }
-
-
                 /*受け取ったjsonは配列の中にオブジェクトがあったので
                 .map(a =>{})で配列からオブジェクトを取り出し
                 その中でObject.values(a.title)を使い
