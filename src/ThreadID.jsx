@@ -41,8 +41,8 @@ function change(e){
 async function textpost(){
     try{
         if(text !== ""){
-            if(text.replace(/\s+/g,"") === ""){throw new Error("空白文字のみで入力しないでください")}
-            const posttext = text.replace(/\s+!||\n+/g,"")
+            if(text.trim() === ""){throw new Error("空白文字のみで入力しないでください")}
+            const posttext = text.trim()
             
             const post = {'post':posttext}
             const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${url.id}/posts`,{
@@ -50,10 +50,10 @@ async function textpost(){
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(post)})
 
-            const object = await response.json()
             if(response.status === 400){throw new Error("バリテーションエラー")}
             else if(response.status === 500){throw new Error("サーバーエラー")}
 
+            const object = await response.json()
             setPostID(object.id)
             setText("")
             alert("送信成功:" + object.post)
@@ -76,7 +76,7 @@ async function textpost(){
             )}
     
             <form>
-                <textarea className="textarea" value={text} placeholder="投稿内容を入力" onChange={(e)=> change(e)} required></textarea>
+                <textarea className="textarea" value={text} placeholder="投稿用フォーム : 投稿内容を入力" onChange={(e)=> change(e)}></textarea>
                 <input type="button" value="送信" onClick={()=>textpost()}></input>
             </form>
         </div> 
